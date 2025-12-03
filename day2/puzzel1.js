@@ -1,33 +1,23 @@
 const memory = Deno.readTextFileSync("./input.txt");
-const memoryArray = memory.split(",").map((x) => parseInt(x));
+export const parsedData = memory.split(",").map((x) => parseInt(x));
 
-memoryArray[1] = 12;
-memoryArray[2] = 2;
+parsedData[1] = 12;
+parsedData[2] = 1;
 
-const add = (index) => {
-  memoryArray[memoryArray[index + 3]] = memoryArray[memoryArray[index + 1]] +
-    memoryArray[memoryArray[index + 2]];
-  return;
-};
-
-const multi = (index) => {
-  memoryArray[memoryArray[index + 3]] = memoryArray[memoryArray[index + 1]] *
-    memoryArray[memoryArray[index + 2]];
-  return;
-};
-
-const doSomething = {
-  1: add,
-  2: multi,
-};
-
-const doOperations = (memoryArray) => {
-  for (let index = 0; index < memoryArray.length; index = index + 4) {
-    if (memoryArray[index] === 99) return;
-    doSomething[memoryArray[index]](index);
+export const doOperations = (data) => {
+  const newData = data.slice();
+  for (let index = 0; index < newData.length; index = index + 4) {
+    if (newData[index] === 1) {
+      newData[newData[index + 3]] = newData[newData[index + 1]] +
+        newData[newData[index + 2]];
+    }
+    if (newData[index] === 2) {
+      newData[newData[index + 3]] = newData[newData[index + 1]] *
+        newData[newData[index + 2]];
+    }
+    if (newData[index] === 99) return newData[0];
   }
+  return newData[0];
 };
 
-doOperations(memoryArray);
-
-console.log(memoryArray);
+console.log(doOperations(parsedData));
