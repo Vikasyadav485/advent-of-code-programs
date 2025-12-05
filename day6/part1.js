@@ -10,7 +10,7 @@
 // J)K
 // K)L`;
 
-const map = Deno.readTextFileSync("./input.txt");
+export const map = Deno.readTextFileSync("./input.txt");
 
 const countSteps = (countsObject, key) => {
   if (countsObject[key] === undefined) return 0;
@@ -20,11 +20,11 @@ const countSteps = (countsObject, key) => {
   return countSteps(countsObject, countsObject[key]) + 1;
 };
 
-const parseMapData = (map) => {
+export const parseMapData = (map) => {
   return map.split("\n").map((x) => x.split(")"));
 };
 
-const dataInObject = (planetsWithOrbits) => {
+export const dataInObject = (planetsWithOrbits) => {
   const countsObject = {};
   planetsWithOrbits.forEach((element) => {
     countsObject[element[1]] = element[0];

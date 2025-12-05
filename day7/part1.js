@@ -4,7 +4,8 @@ export const numbersArray = Deno.readTextFileSync("./input.txt").split(",").map(
   (x) => parseInt(x),
 );
 
-const possibleSequences = permutations([0, 1, 2, 3, 4]);
+const possibleSettings = permutations([0, 1, 2, 3, 4]);
+const feedbackLoopSettings = permutations([5, 6, 7, 8, 9]);
 
 const value = (numbers, index, mode = "0") => {
   if (mode === "0") return numbers[numbers[index]];
@@ -114,4 +115,4 @@ const maximumThrusterSignal = (numbersArray, sequences) => {
   return Math.max(...thrusterSingnals(numbersArray, sequences));
 };
 
-console.log(maximumThrusterSignal(numbersArray, possibleSequences));
+console.log(maximumThrusterSignal(numbersArray, possibleSettings));
